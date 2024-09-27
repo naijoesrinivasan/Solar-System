@@ -1,6 +1,5 @@
 import * as THREE from 'three'
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js'
-import { texture, textureLoad } from 'three/webgpu'
 
 
 const scene = new THREE.Scene()
@@ -11,19 +10,19 @@ document.body.appendChild(renderer.domElement)
 
 // orbit controls
 const controls = new OrbitControls(camera, renderer.domElement)
-camera.position.set(-90, 140, 140)
+camera.position.set(-100, 140, 140)
 controls.update()
 
 // axes helper
-const axesHelper = new THREE.AxesHelper(5)
-scene.add(axesHelper)
+// const axesHelper = new THREE.AxesHelper(5)
+// scene.add(axesHelper)
 
 // ambient light
-const ambientLight = new THREE.AmbientLight(0xffffff, 0.2)
+const ambientLight = new THREE.AmbientLight(0x555555)
 scene.add(ambientLight)
 
 // point light
-const pointLight = new THREE.PointLight(0xffffff, 1, 300)
+const pointLight = new THREE.PointLight(0xffffff, 1000, 500)
 scene.add(pointLight)
 
 // star texture background
@@ -78,28 +77,28 @@ const sunMesh = new THREE.Mesh(sunGeo, sunMat)
 scene.add(sunMesh)
 
 // mercury
-const mercury = createPlanet(3.2, 'mercurymap.jpg', 28)
+const mercury = createPlanet(3.2, '8k_mercury.jpg', 28)
 
 // venus
-const venus = createPlanet(5.8, 'venusmap.jpg', 44)
+const venus = createPlanet(5.8, '8k_venus_surface.jpg', 44)
 
 // earth
-const earth = createPlanet(6, 'earthmap1k.jpg', 62)
+const earth = createPlanet(6, '8k_earth_daymap.jpg', 62)
 
 // mars
-const mars = createPlanet(4, 'mars_1k_color.jpg', 78)
+const mars = createPlanet(4, '8k_mars.jpg', 78)
 
 // jupiter
-const jupiter = createPlanet(12, 'jupitermap.jpg', 100)
+const jupiter = createPlanet(12, '8k_jupiter.jpg', 100)
 
 // saturn
-const saturn = createPlanet(10, 'saturnmap.jpg', 138, { innerRadius: 10, outerRadius: 20, texture: 'saturnringcolor.jpg' })
+const saturn = createPlanet(10, '8k_saturn.jpg', 138, { innerRadius: 10, outerRadius: 20, texture: '8k_saturn_ring_alpha.png' })
 
 // uranus
 const uranus = createPlanet(7, 'uranus.jpg', 176, { innerRadius: 7, outerRadius: 12, texture: 'uranusringcolour.jpg' })
 
 // neptune
-const neptune = createPlanet(7, 'neptunemap.jpg', 200)
+const neptune = createPlanet(7, '2k_neptune.jpg', 200)
 
 // pluto
 const pluto = createPlanet(2.8, 'plutomap1k.jpg', 216)
@@ -130,10 +129,10 @@ function animate(time) {
     uranus.planetObj.rotateY(0.0004)
 
     neptune.planet.rotateY(0.032)
-    neptune.planet.rotateY(0.0001)
+    neptune.planetObj.rotateY(0.0001)
 
     pluto.planet.rotateY(0.008)
-    pluto.planet.rotateY(0.00007)
+    pluto.planetObj.rotateY(0.00007)
 
     renderer.render(scene, camera)
 }
